@@ -58,7 +58,7 @@ Dalam dinamika perkuliahan di perguruan tinggi, mahasiswa sering mengalami kenda
 
 ---
 
-## 🏗️ 3. Arsitektur Sistem Multi-Tier & Alur Data
+## 3. Arsitektur Sistem Multi-Tier & Alur Data
 
 Aplikasi NoteBridge dirancang dengan arsitektur cloud-native multi-tier yang terisolasi dalam container menggunakan Docker & Docker Compose:
 
@@ -75,7 +75,7 @@ Aplikasi NoteBridge dirancang dengan arsitektur cloud-native multi-tier yang ter
 
 ---
 
-## 🚀 4. Panduan Menjalankan Aplikasi di Localhost
+## 4. Panduan Menjalankan Aplikasi di Localhost
 
 Aplikasi dirancang agar dapat dijalankan secara instan dengan **satu perintah**:
 
@@ -85,19 +85,19 @@ Aplikasi dirancang agar dapat dijalankan secara instan dengan **satu perintah**:
 
 ### Langkah Instalasi
 
-# 1. Clone repositori ini
+1. Clone repositori ini
 ```bash
 git clone https://github.com/<USERNAME>/NoteBridge.git
 cd NoteBridge
 ```
 
-# 2. Siapkan berkas environment (tanpa mengekspos kredensial rahasia)
+2. Siapkan berkas environment (tanpa mengekspos kredensial rahasia)
 ```bash
 cp .env.example .env
-```
 # (Untuk pengguna Windows PowerShell: Copy-Item .env.example .env)
+```
 
-# 3. Jalankan seluruh container
+3. Jalankan seluruh container
 ```bash
 docker compose up -d --build
 # (atau: docker-compose up -d --build)
