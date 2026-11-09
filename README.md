@@ -149,9 +149,9 @@ Aplikasi menggunakan Docker Named Volume `postgres_data` yang dipetakan ke direk
 
 ## 7. Tautan Publikasi Projek
 
-* 📂 **GitHub Repository**: `https://github.com/[username-anda]/NoteBridge`
+* 📂 **GitHub Repository**: `https://github.com/shierenrevalina/NoteBridge`
 * 🎥 **Video Demo YouTube (3–5 Menit)**: `https://youtu.be/[id-video-anda]`
-* 📝 **Artikel Publik (Medium / Dev.to)**: `https://dev.to/[username-anda]/membangun-arsitektur-cloud-native-notebridge`
+* 📝 **Artikel Publik (Medium / Dev.to)**: `https://medium.com/@shieren.revalina06/building-notebridge-a-docker-based-platform-for-sharing-academic-notes-f48d9a7ec636`
 
 ---
 
