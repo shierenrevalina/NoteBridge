@@ -1,4 +1,4 @@
-# NoteBridge 📚🌉
+# NoteBridge
 
 [![Docker](https://img.shields.io/badge/Docker-20.10+-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![Docker Compose](https://img.shields.io/badge/Docker_Compose-Multi--Tier-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/compose/)
@@ -9,11 +9,11 @@
 
 > **Platform Berbagi, Mencari, dan Mengakses Catatan Perkuliahan Terpusat Berbasis Cloud-Native**  
 > Tugas Ujian Tengah Semester (UTS) — Mata Kuliah: **COMP6991031 – Cloud Services**  
-> Program Studi: **Computer Science / Teknik Informatika — BINUS University (Kelas LA75)**
+> Program Studi: **Computer Science — BINUS University (Kelas LA75)**
 
 ---
 
-## 📸 Tampilan Antarmuka Aplikasi (Web Dashboard)
+## Tampilan Antarmuka Aplikasi (Web Dashboard)
 
 Berikut adalah tampilan antarmuka web interaktif **NoteBridge** yang berjalan di container `localhost:3000`:
 
@@ -31,7 +31,7 @@ Berikut adalah tampilan antarmuka web interaktif **NoteBridge** yang berjalan di
 
 ---
 
-## 📌 1. Latar Belakang & Masalah (Problem Statement)
+## 1. Latar Belakang & Masalah (Problem Statement)
 
 ### Permasalahan
 Dalam dinamika perkuliahan di perguruan tinggi, mahasiswa sering mengalami kendala aksesibilitas materi:
@@ -45,7 +45,7 @@ Dalam dinamika perkuliahan di perguruan tinggi, mahasiswa sering mengalami kenda
 
 ---
 
-## ✨ 2. Empat Fitur Utama (Minimum Viable Product - MVP)
+## 2. Empat Fitur Utama (Minimum Viable Product - MVP)
 
 1. **Upload Notes (Unggah Catatan)**:  
    Mahasiswa dapat mengunggah catatan PDF dengan melampirkan metadata terstruktur: judul catatan, kode mata kuliah, nama penulis, dan deskripsi materi.
@@ -58,7 +58,7 @@ Dalam dinamika perkuliahan di perguruan tinggi, mahasiswa sering mengalami kenda
 
 ---
 
-## 🏗️ 3. Arsitektur Sistem Multi-Tier & Alur Data
+## 3. Arsitektur Sistem Multi-Tier & Alur Data
 
 Aplikasi NoteBridge dirancang dengan prinsip pemisahan tanggung jawab (*Separation of Concerns*) dan dikemas ke dalam arsitektur multi-container:
 
@@ -138,7 +138,7 @@ Setelah proses build selesai:
 
 ---
 
-## 📡 5. Dokumentasi Endpoint REST API
+## 5. Dokumentasi Endpoint REST API
 
 | Method | Endpoint | Deskripsi | Status Code | Respon Sukses |
 |---|---|---|---|---|
@@ -149,7 +149,7 @@ Setelah proses build selesai:
 
 ---
 
-## 🛡️ 6. Uji Persistensi Data (Data Persistence Proof)
+## 6. Uji Persistensi Data (Data Persistence Proof)
 
 Aplikasi menggunakan Docker Named Volume `postgres_data` yang dipetakan ke direktori internal PostgreSQL `/var/lib/postgresql/data`.
 
@@ -171,7 +171,7 @@ Aplikasi menggunakan Docker Named Volume `postgres_data` yang dipetakan ke direk
 
 ---
 
-## 🔗 7. Tautan Publikasi Projek
+## 7. Tautan Publikasi Projek
 
 * 📂 **GitHub Repository**: `https://github.com/[username-anda]/NoteBridge`
 * 🎥 **Video Demo YouTube (3–5 Menit)**: `https://youtu.be/[id-video-anda]`
@@ -179,7 +179,7 @@ Aplikasi menggunakan Docker Named Volume `postgres_data` yang dipetakan ke direk
 
 ---
 
-## 🤖 8. AI Usage Declaration (Tipe: Partial)
+## 8. AI Usage Declaration (Tipe: Partial)
 
 *Sesuai ketentuan integritas akademik ujian UTS Cloud Services (Tipe Penggunaan AI: **Partial**, maks. 50% proses).*
 
