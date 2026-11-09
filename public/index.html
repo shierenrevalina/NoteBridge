@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoteBridge - Platform Berbagi Catatan Kuliah</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="logo-icon">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <button class="btn-action-add" id="openUploadModalBtn" title="Unggah Catatan Baru">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-menu">
+        <a href="#" class="menu-item active" title="Overview">
+          <i class="fa-solid fa-grip"></i>
+          <span>Overview</span>
+        </a>
+        <a href="#" class="menu-item" title="Saved">
+          <i class="fa-regular fa-bookmark"></i>
+          <span>Saved</span>
+        </a>
+        <a href="#" class="menu-item" id="filterMyUploadsBtn" title="My Uploads">
+          <i class="fa-solid fa-arrow-up-from-bracket"></i>
+          <span>Uploads</span>
+        </a>
+        <a href="#" class="menu-item" title="Rewards">
+          <i class="fa-solid fa-award"></i>
+          <span>Rewards</span>
+        </a>
+        <a href="#" class="menu-item" title="Notifications">
+          <i class="fa-regular fa-bell"></i>
+          <span>Notifications</span>
+        </a>
+        <a href="#" class="menu-item" title="Settings">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+        </a>
+        <a href="#" class="menu-item" title="Help">
+          <i class="fa-regular fa-circle-question"></i>
+          <span>Help</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-avatar" title="Cybersmith Profile">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar">
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Welcome Banner -->
+      <header class="welcome-header">
+        <h1>Welcome back, <span class="highlight-user">Cybersmith!</span> 👋</h1>
+        <p class="subtitle">Ready to explore today?</p>
+
+        <!-- Search Bar with dynamic course search -->
+        <div class="search-wrapper">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="searchInput" placeholder="Enter a course code or course title (e.g. CSC 204, MTH 202)">
+          <button class="search-submit" id="searchBtn">
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Stat Cards Grid -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon-wrapper blue">
+            <i class="fa-solid fa-trophy"></i>
+          </div>
+          <div class="stat-body">
+            <span class="stat-label">Your Points</span>
+            <h2 class="stat-value">85%</h2>
+            <p class="stat-desc">You're doing great! Upload 3 more materials to unlock Ad-Free Week</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon-wrapper indigo">
+            <i class="fa-solid fa-download"></i>
+          </div>
+          <div class="stat-body">
+            <span class="stat-label">Total Downloads</span>
+            <h2 class="stat-value" id="totalDownloadsStat">120</h2>
+            <p class="stat-desc">You have downloaded helpful materials. You're on track to complete all your academic goals</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon-wrapper sky">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+          <div class="stat-body">
+            <span class="stat-label">Total Uploads</span>
+            <h2 class="stat-value" id="totalUploadsStat">50</h2>
+            <p class="stat-desc">You have helped a lot of students. You're making a real difference in the community!</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon-wrapper purple">
+            <i class="fa-regular fa-bookmark"></i>
+          </div>
+          <div class="stat-body">
+            <span class="stat-label">Saved Materials</span>
+            <h2 class="stat-value">12</h2>
+            <p class="stat-desc">Your materials were downloaded 120 times. You're making a real difference in the community!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Materials Section -->
+      <section class="materials-section">
+        <div class="section-header">
+          <h2>Recent Materials</h2>
+          <div class="header-actions">
+            <button class="btn-sort" title="Urutkan"><i class="fa-solid fa-arrow-down-short-wide"></i></button>
+            <button class="btn-view-all" id="resetFilterBtn">View All <i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+
+        <!-- Dynamic Note Cards Container -->
+        <div class="notes-grid" id="notesContainer">
+          <!-- Populated dynamically via app.js -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Upload Note Modal (MVP Feature 1) -->
+  <div class="modal-overlay" id="uploadModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-cloud-arrow-up"></i> Upload Lecture Note</h3>
+        <button class="btn-close" id="closeUploadModalBtn">&times;</button>
+      </div>
+      <form id="uploadForm">
+        <div class="form-group">
+          <label for="noteTitle">Judul Catatan *</label>
+          <input type="text" id="noteTitle" required placeholder="Contoh: Rangkuman Lengkap Cloud Computing LO1 & LO2">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="courseCode">Kode Mata Kuliah *</label>
+            <input type="text" id="courseCode" required placeholder="Contoh: COMP6991031 atau CSC 204">
+          </div>
+          <div class="form-group">
+            <label for="noteAuthor">Penulis / Kontributor</label>
+            <input type="text" id="noteAuthor" value="Cybersmith" placeholder="Nama Mahasiswa">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="noteDescription">Deskripsi Materi</label>
+          <textarea id="noteDescription" rows="3" placeholder="Jelaskan ringkas topik bahasan dalam catatan ini..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="fileName">Nama Dokumen PDF</label>
+          <input type="text" id="fileName" value="UTS_CloudServices_NoteBridge.pdf" placeholder="file-name.pdf">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" id="cancelUploadBtn">Batal</button>
+          <button type="submit" class="btn-submit"><i class="fa-solid fa-paper-plane"></i> Unggah Catatan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
