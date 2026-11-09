@@ -1,0 +1,103 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # Service 1: Web Application (NoteBridge)
+  # ==========================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: notebridge-app:1.0.0
+    container_name: notebridge-app
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - PORT=${PORT:-3000}
+      - NODE_ENV=${NODE_ENV:-production}
+      - DB_HOST=notebridge-db
+      - DB_PORT=${DB_PORT:-5432}
+      - DB_NAME=${DB_NAME:-notebridge_db}
+      - DB_USER=${DB_USER:-notebridge_user}
+      - DB_PASSWORD=${DB_PASSWORD:-dummy_secret_password_123}
+      - REDIS_HOST=notebridge-cache
+      - REDIS_PORT=${REDIS_PORT:-6379}
+    depends_on:
+      notebridge-db:
+        condition: service_healthy
+      notebridge-cache:
+        condition: service_healthy
+    networks:
+      - notebridge-net
+
+  # ==========================================
+  # Service 2: Database (PostgreSQL)
+  # ==========================================
+  notebridge-db:
+    image: postgres:16-alpine
+    container_name: notebridge-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-notebridge_db}
+      POSTGRES_USER: ${DB_USER:-notebridge_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-dummy_secret_password_123}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-notebridge_user} -d ${DB_NAME:-notebridge_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - notebridge-net
+
+  # ==========================================
+  # Service 3 (Bonus +5 Poin): Cache (Redis)
+  # ==========================================
+  notebridge-cache:
+    image: redis:7.2-alpine
+    container_name: notebridge-cache
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    networks:
+      - notebridge-net
+
+  # ==========================================
+  # Service 4 (Profile 'tools'): Database Management GUI
+  # ==========================================
+  adminer:
+    image: adminer:4.8.1
+    container_name: notebridge-adminer
+    restart: unless-stopped
+    profiles:
+      - tools
+    ports:
+      - "8080:8080"
+    networks:
+      - notebridge-net
+
+# ==========================================
+# Named Volumes (Data Persistence)
+# ==========================================
+volumes:
+  postgres_data:
+    name: notebridge_postgres_data
+
+# ==========================================
+# User-Defined Bridge Network (Service Discovery via DNS)
+# ==========================================
+networks:
+  notebridge-net:
+    name: notebridge-network
+    driver: bridge
