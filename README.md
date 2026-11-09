@@ -58,49 +58,20 @@ Dalam dinamika perkuliahan di perguruan tinggi, mahasiswa sering mengalami kenda
 
 ---
 
-## 3. Arsitektur Sistem Multi-Tier & Alur Data
+## 🏗️ 3. Arsitektur Sistem Multi-Tier & Alur Data
 
-Aplikasi NoteBridge dirancang dengan prinsip pemisahan tanggung jawab (*Separation of Concerns*) dan dikemas ke dalam arsitektur multi-container:
+Aplikasi NoteBridge dirancang dengan arsitektur cloud-native multi-tier yang terisolasi dalam container menggunakan Docker & Docker Compose:
 
-```
-[ Client / Web Browser ]
-           │
-           │ HTTP Request (Port 3000)
-           ▼
-┌──────────────────────────────────────────────────────────────┐
-│  Docker User-Defined Network: notebridge-network (Bridge)    │
-│                                                              │
-│  ┌────────────────────────────────────────────────────────┐  │
-│  │ Container: notebridge-app                              │  │
-│  │ (Node.js 20 Alpine - Express REST API & Web UI)        │  │
-│  │ Port Binding: 0.0.0.0:3000 -> 3000                     │  │
-│  └──────────────┬──────────────────────────┬──────────────┘  │
-│                 │                          │                 │
-│                 │ DNS: notebridge-cache    │ DNS:            │
-│                 │ Port: 6379               │ notebridge-db   │
-│                 ▼                          │ Port: 5432      │
-│  ┌──────────────────────────────┐          ▼                 │
-│  │ Container: notebridge-cache  │  ┌──────────────────────┐  │
-│  │ (Redis 7.2 Alpine - Cache)   │  │ Container:           │  │
-│  │ Status: Healthcheck Enabled  │  │ notebridge-db        │  │
-│  └──────────────────────────────┘  │ (PostgreSQL 16)      │  │
-│                                    │ Relational Database  │  │
-│                                    └──────────┬───────────┘  │
-│                                               │              │
-└───────────────────────────────────────────────┼──────────────┘
-                                                ▼ Mount
-                                    ┌──────────────────────┐
-                                    │ Named Volume:        │
-                                    │ notebridge_postgres_ │
-                                    │ data (Persistent)    │
-                                    └──────────────────────┘
-```
+![NoteBridge Architecture Diagram](screenshots/architecture.png)
 
-### Komponen Arsitektur:
-* **Application Tier (`notebridge-app`)**: Backend REST API & Frontend statis berbasis Node.js 20 Alpine.
-* **Database Tier (`notebridge-db`)**: PostgreSQL 16 Alpine dengan data persisten pada *named volume* `postgres_data`.
-* **Caching Tier (`notebridge-cache`) — *Fitur Bonus UTS (+5 Poin)***: Redis 7.2 Alpine untuk menyimpan cache kueri pembacaan data (`GET /api/notes`) dengan masa kedaluwarsa otomatis (TTL 60 detik) dan mekanisme *cache invalidation* setiap kali ada data catatan baru yang diunggah.
-* **Database Management GUI (`adminer`) — *Profile Tools***: Tersedia via profil terisolasi `tools` pada port 8080 untuk inspeksi database secara visual.
+### Komponen & Alur Arsitektur:
+1. **Client / Web Browser**: Mahasiswa mengakses antarmuka aplikasi melalui request HTTP pada port host `3000`.
+2. **Container Application (`notebridge-app`)**: Dibangun dengan base image `node:20-alpine3.19` yang melayani antarmuka web dan Express REST API dengan port binding `0.0.0.0:3000 -> 3000`.
+3. **Docker User-Defined Network (`notebridge-network`)**: Jaringan bridge privat yang memfasilitasi komunikasi antarkontainer secara aman via internal DNS service name tanpa mengekspos port database ke jaringan publik.
+4. **Container Cache (`notebridge-cache`) — *Fitur Bonus UTS (+5 Poin)***: Berbasis `redis:7.2-alpine` pada port `6379` dengan healthcheck aktif untuk menyimpan cache kueri pembacaan data (`GET /api/notes`) demi mereduksi latensi respons.
+5. **Container Database (`notebridge-db`)**: Berbasis `postgres:16-alpine` pada port `5432` sebagai basis data relasional utama untuk menyimpan katalog dan metadata catatan perkuliahan.
+6. **Named Volume (`notebridge_postgres_data`)**: Dipetakan (*mounted*) ke `/var/lib/postgresql/data` pada database container untuk menjamin persistensi data catatan tetap utuh meskipun container dimatikan (`docker compose down`).
+7. **Database Management GUI (`adminer`) — *Profile Tools***: Tersedia via profil terisolasi `tools` pada port `8080` untuk inspeksi basis data secara visual jika dibutuhkan.
 
 ---
 
@@ -113,16 +84,21 @@ Aplikasi dirancang agar dapat dijalankan secara instan dengan **satu perintah**:
 * Git terpasang di sistem operasi Anda.
 
 ### Langkah Instalasi
-```bash
+
 # 1. Clone repositori ini
+```bash
 git clone https://github.com/<USERNAME>/NoteBridge.git
 cd NoteBridge
+```
 
 # 2. Siapkan berkas environment (tanpa mengekspos kredensial rahasia)
+```bash
 cp .env.example .env
+```
 # (Untuk pengguna Windows PowerShell: Copy-Item .env.example .env)
 
 # 3. Jalankan seluruh container
+```bash
 docker compose up -d --build
 # (atau: docker-compose up -d --build)
 ```
