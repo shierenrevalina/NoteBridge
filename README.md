@@ -61,15 +61,13 @@ Berikut adalah rincian tumpukan teknologi (*tech stack*) yang diimplementasikan 
 
 | Komponen | Teknologi |
 |---|---|
-| **Frontend** | HTML5, CSS3, JavaScript (Vanilla ES6+) |
+| **Frontend** | HTML, CSS, JavaScript |
 | **Backend** | Node.js (v20 Alpine) dan Express.js |
 | **Database** | PostgreSQL 16 Alpine |
 | **Database Driver** | `pg` (node-postgres) |
-| **Caching Layer** *(Bonus +5 Poin)* | Redis 7.2 Alpine |
+| **Caching Layer** | Redis 7.2 Alpine |
 | **Cache Client** | `redis` (node-redis) |
-| **Containerization** | Docker (Multi-Stage Build: `builder` → `runner`) |
-| **Container Orchestration** | Docker Compose |
-| **Database Management GUI** | Adminer 4.8.1 (Profile `tools`) |
+| **Containerization** | Docker & Docker Compose |
 
 ---
 
@@ -167,7 +165,7 @@ Aplikasi menggunakan Docker Named Volume `postgres_data` yang dipetakan ke direk
 
 ---
 
-## 9. AI Usage Declaration (Tipe: Partial)
+## 9. AI Usage Declaration
 
 1. **Alat AI yang Digunakan**: ChatGPT
 2. **Tahapan & Bagian yang Dibantu**:
