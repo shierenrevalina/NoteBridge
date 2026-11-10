@@ -35,7 +35,7 @@ Dalam dinamika perkuliahan di perguruan tinggi, mahasiswa sering mengalami kenda
 * **Ketidakhadiran karena Sakit**: Mahasiswa yang berhalangan hadir kuliah kesulitan mengejar ketertinggalan penjelasan materi dosen.
 * **Materi yang Rumit**: Mahasiswa yang membutuhkan sudut pandang penjelasan berbeda kesulitan menemukan catatan rekan sejawat.
 * **Persiapan Menjelang Ujian**: Menjelang UTS/UAS, mahasiswa membutuhkan rangkuman materi ringkas dan terstruktur.
-* **Catatan Tercecer**: Catatan kuliah selama ini tersebar secara acak di berbagai grup WhatsApp, tautan Google Drive pribadi, atau *direct message* yang mudah tenggelam dan sulit ditemukan kembali.
+* **Catatan Tercecer**: Catatan kuliah selama ini tersebar secara acak di berbagai grup WhatsApp, tertulis di buku maupun kertas, atau tersimpan di galeri smartphone yang mudah tenggelam dan sulit ditemukan kembali.
 
 ### Solusi: NoteBridge
 **NoteBridge** menyediakan solusi terpusat (*one-stop academic platform*) agar mahasiswa dapat mengunggah, mencari, melihat, dan mengunduh catatan perkuliahan secara terstruktur, cepat, dan aman.
@@ -138,8 +138,8 @@ Aplikasi menggunakan Docker Named Volume `postgres_data` yang dipetakan ke direk
 4. Buka kembali browser: **Catatan baru yang telah diunggah tetap tersimpan utuh dan tidak hilang!**
 
 > **Perbedaan Mendasar `docker compose down` vs `docker compose down -v`:**
-> * `docker compose down`: Hanya mematikan dan menghapus container serta jaringan, namun **TETAP MEMPERTAHANKAN (PRESERVE)** named volume sehingga data database aman.
-> * `docker compose down -v`: Menghapus container sekaligus **MENGHAPUS PERMANEN SELURUH NAMED VOLUMES**, menyebabkan seluruh catatan di dalam basis data terhapus total (*data loss*).
+> * `docker compose down`: Hanya mematikan dan menghapus container serta jaringan, namun tetap mempertahankan (preserve) named volume sehingga data database aman.
+> * `docker compose down -v`: Menghapus container sekaligus menghapus permanen seluruh named volumes, menyebabkan seluruh catatan di dalam basis data terhapus total (*data loss*).
 
 ---
 
