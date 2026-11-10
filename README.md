@@ -38,7 +38,7 @@ Dalam dinamika perkuliahan di perguruan tinggi, mahasiswa sering mengalami kenda
 * **Catatan Tercecer**: Catatan kuliah selama ini tersebar secara acak di berbagai grup WhatsApp, tertulis di buku maupun kertas, atau tersimpan di galeri smartphone yang mudah tenggelam dan sulit ditemukan kembali.
 
 ### Solusi: NoteBridge
-**NoteBridge** menyediakan solusi terpusat (*one-stop academic platform*) agar mahasiswa dapat mengunggah, mencari, melihat, dan mengunduh catatan perkuliahan secara terstruktur, cepat, dan aman.
+NoteBridge menyediakan solusi terpusat (*one-stop academic platform*) agar mahasiswa dapat mengunggah, mencari, melihat, dan mengunduh catatan perkuliahan secara terstruktur, cepat, dan aman.
 
 ---
 
@@ -55,7 +55,25 @@ Dalam dinamika perkuliahan di perguruan tinggi, mahasiswa sering mengalami kenda
 
 ---
 
-## 3. Arsitektur Sistem Multi-Tier & Alur Data
+## 3. Teknologi yang Digunakan
+
+Berikut adalah rincian tumpukan teknologi (*tech stack*) yang diimplementasikan pada proyek NoteBridge:
+
+| Komponen | Teknologi |
+|---|---|
+| **Frontend** | HTML5, CSS3, JavaScript (Vanilla ES6+) |
+| **Backend** | Node.js (v20 Alpine) dan Express.js |
+| **Database** | PostgreSQL 16 Alpine |
+| **Database Driver** | `pg` (node-postgres) |
+| **Caching Layer** *(Bonus +5 Poin)* | Redis 7.2 Alpine |
+| **Cache Client** | `redis` (node-redis) |
+| **Containerization** | Docker (Multi-Stage Build: `builder` → `runner`) |
+| **Container Orchestration** | Docker Compose |
+| **Database Management GUI** | Adminer 4.8.1 (Profile `tools`) |
+
+---
+
+## 4. Arsitektur Sistem Multi-Tier & Alur Data
 
 Aplikasi NoteBridge dirancang dengan arsitektur cloud-native multi-tier yang terisolasi dalam container menggunakan Docker & Docker Compose:
 
@@ -71,7 +89,7 @@ Aplikasi NoteBridge dirancang dengan arsitektur cloud-native multi-tier yang ter
 
 ---
 
-## 4. Panduan Menjalankan Aplikasi di Localhost
+## 5. Panduan Menjalankan Aplikasi di Localhost
 
 Aplikasi dirancang agar dapat dijalankan secara instan dengan satu perintah:
 
@@ -108,7 +126,7 @@ Setelah proses build selesai:
 
 ---
 
-## 5. Dokumentasi Endpoint REST API
+## 6. Dokumentasi Endpoint REST API
 
 | Method | Endpoint | Deskripsi | Status Code | Respon Sukses |
 |---|---|---|---|---|
@@ -119,7 +137,7 @@ Setelah proses build selesai:
 
 ---
 
-## 6. Uji Persistensi Data (Data Persistence Proof)
+## 7. Uji Persistensi Data (Data Persistence Proof)
 
 Aplikasi menggunakan Docker Named Volume `postgres_data` yang dipetakan ke direktori internal PostgreSQL `/var/lib/postgresql/data`.
 
@@ -141,7 +159,7 @@ Aplikasi menggunakan Docker Named Volume `postgres_data` yang dipetakan ke direk
 
 ---
 
-## 7. Tautan Publikasi Projek
+## 8. Tautan Publikasi Projek
 
 * 📂 **GitHub Repository**: `https://github.com/shierenrevalina/NoteBridge`
 * 🎥 **Video Demo YouTube (3–5 Menit)**: `https://youtu.be/[id-video-anda]`
@@ -149,7 +167,7 @@ Aplikasi menggunakan Docker Named Volume `postgres_data` yang dipetakan ke direk
 
 ---
 
-## 8. AI Usage Declaration (Tipe: Partial)
+## 9. AI Usage Declaration (Tipe: Partial)
 
 1. **Alat AI yang Digunakan**: ChatGPT
 2. **Tahapan & Bagian yang Dibantu**:
