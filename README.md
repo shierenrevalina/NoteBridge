@@ -5,17 +5,14 @@
 [![Node.js](https://img.shields.io/badge/Node.js-20_Alpine-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16_Alpine-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Redis](https://img.shields.io/badge/Redis-7.2_Alpine-DC382D?logo=redis&logoColor=white)](https://redis.io/)
-[![Status](https://img.shields.io/badge/UTS_Cloud_Services-COMP6991031-success)](https://binus.ac.id/)
 
-> **Platform Berbagi, Mencari, dan Mengakses Catatan Perkuliahan Terpusat Berbasis Cloud-Native**  
-> Tugas Ujian Tengah Semester (UTS) — Mata Kuliah: **COMP6991031 – Cloud Services**  
-> Program Studi: **Computer Science — BINUS University (Kelas LA75)**
+> **NoteBridge merupakan platform berbagi catatan perkuliahan antar mahasiswa yang bertujuan untuk memudahkan mahasiswa dalam mengunggah, mencari, dan mengakses materi serta catatan perkuliahan secara online. Melalui platform ini, mahasiswa dapat saling berbagi sumber belajar sehingga proses belajar menjadi lebih mudah, praktis, dan kolaboratif.**
 
 ---
 
 ## Tampilan Antarmuka Aplikasi (Web Dashboard)
 
-Berikut adalah tampilan antarmuka web interaktif **NoteBridge** yang berjalan di container `localhost:3000`:
+Berikut adalah tampilan antarmuka web interaktif NoteBridge yang berjalan di container `localhost:3000`:
 
 ![NoteBridge Dashboard](screenshots/dashboard.png)
 
@@ -68,16 +65,15 @@ Aplikasi NoteBridge dirancang dengan arsitektur cloud-native multi-tier yang ter
 1. **Client / Web Browser**: Mahasiswa mengakses antarmuka aplikasi melalui request HTTP pada port host `3000`.
 2. **Container Application (`notebridge-app`)**: Dibangun dengan base image `node:20-alpine3.19` yang melayani antarmuka web dan Express REST API dengan port binding `0.0.0.0:3000 -> 3000`.
 3. **Docker User-Defined Network (`notebridge-network`)**: Jaringan bridge privat yang memfasilitasi komunikasi antarkontainer secara aman via internal DNS service name tanpa mengekspos port database ke jaringan publik.
-4. **Container Cache (`notebridge-cache`) — *Fitur Bonus UTS (+5 Poin)***: Berbasis `redis:7.2-alpine` pada port `6379` dengan healthcheck aktif untuk menyimpan cache kueri pembacaan data (`GET /api/notes`) demi mereduksi latensi respons.
+4. **Container Cache (`notebridge-cache`)**: Berbasis `redis:7.2-alpine` pada port `6379` dengan healthcheck aktif untuk menyimpan cache kueri pembacaan data (`GET /api/notes`) demi mereduksi latensi respons.
 5. **Container Database (`notebridge-db`)**: Berbasis `postgres:16-alpine` pada port `5432` sebagai basis data relasional utama untuk menyimpan katalog dan metadata catatan perkuliahan.
 6. **Named Volume (`notebridge_postgres_data`)**: Dipetakan (*mounted*) ke `/var/lib/postgresql/data` pada database container untuk menjamin persistensi data catatan tetap utuh meskipun container dimatikan (`docker compose down`).
-7. **Database Management GUI (`adminer`) — *Profile Tools***: Tersedia via profil terisolasi `tools` pada port `8080` untuk inspeksi basis data secara visual jika dibutuhkan.
 
 ---
 
 ## 4. Panduan Menjalankan Aplikasi di Localhost
 
-Aplikasi dirancang agar dapat dijalankan secara instan dengan **satu perintah**:
+Aplikasi dirancang agar dapat dijalankan secara instan dengan satu perintah:
 
 ### Prasyarat
 * [Docker Desktop](https://www.docker.com/products/docker-desktop/) telah terpasang dan dalam status aktif (*Engine running*).
@@ -87,7 +83,7 @@ Aplikasi dirancang agar dapat dijalankan secara instan dengan **satu perintah**:
 
 1. Clone repositori ini
 ```bash
-git clone https://github.com/<USERNAME>/NoteBridge.git
+git clone https://github.com/shierenrevalina/NoteBridge.git
 cd NoteBridge
 ```
 
@@ -157,9 +153,7 @@ Aplikasi menggunakan Docker Named Volume `postgres_data` yang dipetakan ke direk
 
 ## 8. AI Usage Declaration (Tipe: Partial)
 
-*Sesuai ketentuan integritas akademik ujian UTS Cloud Services (Tipe Penggunaan AI: **Partial**, maks. 50% proses).*
-
-1. **Alat AI yang Digunakan**: Google Antigravity / Gemini 3.8
+1. **Alat AI yang Digunakan**: ChatGPT
 2. **Tahapan & Bagian yang Dibantu**:
    - Perumusan batasan masalah dan pemetaan karakteristik esensial cloud menurut NIST.
    - Perancangan template Dockerfile *multi-stage build* (`node:20-alpine3.19`) dan konfigurasi `docker-compose.yml`.
