@@ -90,13 +90,11 @@ cd NoteBridge
 2. Siapkan berkas environment (tanpa mengekspos kredensial rahasia)
 ```bash
 cp .env.example .env
-# (Untuk pengguna Windows PowerShell: Copy-Item .env.example .env)
 ```
 
 3. Jalankan seluruh container
 ```bash
 docker compose up -d --build
-# (atau: docker-compose up -d --build)
 ```
 
 Setelah proses build selesai:
